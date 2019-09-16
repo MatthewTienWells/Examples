@@ -32,15 +32,18 @@ class dataset():
 
 class reel():
     def __init__(self, text):
+        print('\n\n\n\n\n\n' + text)
         lines = text.split('\n')
         title = lines[0]
-        self.frames = int(
-            title[title.index(','):].strip(', ').strip(' frames -->')
-        )
-        header = lines[1]
-        header = header[header.index('>')+1:]
-        self.id = header[:header.index('<')]
-        lines = lines[2:-1]
+        self.frames = None
+        if '<!--' in title:
+            self.frames = int(
+                title[title.index(','):].strip(', ').strip(' frames -->')
+            )
+            header = lines[1]
+            header = header[header.index('>')+1:]
+            self.id = header[:header.index('<')]
+            lines = lines[2:-1]
 
         picturedata = ''
         sounddata = ''
@@ -50,6 +53,11 @@ class reel():
         rsub = False
 
         for line in lines:
+            if '<Id>' in line:
+                print(line)
+            if '<Id>' in line and not (rpic or rson or rsub):
+                header = line[line.index('>')+1:]
+                self.id = header[:header.index('<')]
             if '</MainPicture>' in line:
                 rpic = False
             if '</MainSound>' in line:
@@ -76,10 +84,12 @@ class reel():
         self.picture = dataset(picturedata)
         self.sound = dataset(sounddata)
         self.subtitle = dataset(sounddata)
-        self.picture.properties['frames'] = self.frames
+        if self.frames != None:
+            self.picture.properties['frames'] = self.frames
 
 class ReelList():
     def __init__(self, text):
+        print(text)
         text = text[text.index('<Reel>'):]
         to_strip = ['\n', '</ReelList>', ' ', '\n']
         for seq in to_strip:
@@ -89,7 +99,10 @@ class ReelList():
         reel_num = 0
         self.reels_by_id = {}
         for item in reels:
-            trimmed = item.strip('\n').strip('\n    </Reel>')
+            print(item)
+            trimmed = item.strip('\n')
+            trimmed = trimmed.replace('</Reel>', '').strip(' ').strip('\n')
+            print(trimmed)
             self.reel_dict[reel_num] = reel(trimmed)
             self.reels_by_id[self.reel_dict[reel_num].id] = self.reel_dict[reel_num]
             reel_num += 1
