@@ -110,7 +110,7 @@ def compare_reels(original_list, new_list):
                 original_list.reels_by_id[item].picture.properties[prop] !=
                 new_list.reels_by_id[item].picture.properties[prop]):
                 changes = changes + 'In the reel with ID ' + item
-                changes = changes + ', the picture\'s ' + prop + 'changed from '
+                changes = changes + ',\n the picture\'s ' + prop + ' changed from '
                 changes = changes + original_list.reels_by_id[
                     item].picture.properties[prop] + ' to '
                 changes = changes + new_list.reels_by_id[
@@ -120,7 +120,7 @@ def compare_reels(original_list, new_list):
                 original_list.reels_by_id[item].sound.properties[prop] !=
                 new_list.reels_by_id[item].sound.properties[prop]):
                 changes = changes + 'In the reel with ID ' + item
-                changes = changes + ', the sound\'s ' + prop + 'changed from '
+                changes = changes + ',\n the sound\'s ' + prop + ' changed from '
                 changes = changes + original_list.reels_by_id[
                     item].sound.properties[prop] + ' to '
                 changes = changes + new_list.reels_by_id[
@@ -130,7 +130,7 @@ def compare_reels(original_list, new_list):
                 original_list.reels_by_id[item].subtitle.properties[prop] !=
                 new_list.reels_by_id[item].subtitle.properties[prop]):
                 changes = changes + 'In the reel with ID ' + item
-                changes = changes + ', the subtitles\' ' + prop + 'changed from '
+                changes = changes + ',\n the subtitles\' ' + prop + ' changed from '
                 changes = changes + original_list.reels_by_id[
                     item].subtitle.properties[prop] + ' to '
                 changes = changes + new_list.reels_by_id[
