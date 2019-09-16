@@ -76,6 +76,7 @@ class reel():
         self.picture = dataset(picturedata)
         self.sound = dataset(sounddata)
         self.subtitle = dataset(sounddata)
+        self.picture.properties['frames'] = self.frames
 
 class ReelList():
     def __init__(self, text):
