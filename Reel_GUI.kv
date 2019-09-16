@@ -1,0 +1,20 @@
+GridLayout:
+	cols: 2
+	GridLayout:
+		rows: 2
+		Label:
+			id: output
+			text: 'Awaiting files.'
+		Button:
+			on_release: app.file_compare(file1, file2)
+			text: 'Compare files.'
+	GridLayout:
+		rows: 2
+		FileChooserIconView:
+			id: file1
+			text: 'Drop original file here'
+			path: '.'
+		FileChooserIconView:
+			id: file2
+			path: '.'
+			text: 'Drop new file here'
